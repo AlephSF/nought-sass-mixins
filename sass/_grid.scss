@@ -1,0 +1,132 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "./breakpoints" as *;
+
+/// Mixin to render a grid
+/// @author Aleph
+/// @param {Number} $columns - Number of columns in the grid
+/// @require $grid-column-count
+/// @require $grid-column-gap
+
+$grid-column-count: 12 !default;
+$grid-column-gap: 24px !default;
+$grid-row-gap: 24 !default;
+$grid-responsive-column-counts: (
+  md: 8,
+  sm: 4,
+) !default;
+
+@mixin grid($columns: $grid-column-count, $responsive-columns: true) {
+  display: grid;
+  column-gap: $grid-column-gap;
+  grid-template-columns: repeat($columns, 1fr);
+
+  @if $responsive-columns {
+    @each $breakpoint, $column-count in $grid-responsive-column-counts {
+      @include media-breakpoint-down($breakpoint) {
+        grid-template-columns: repeat($column-count, 1fr);
+      }
+    }
+  }
+}
+
+/// Mixin to render columns with specific start and end columns
+/// inside a grid container
+/// @author Aleph
+/// @param {Number} $startColumn
+/// @param {Number} $endColumn
+
+@mixin columns(
+  $startColumn,
+  $endColumn,
+  $fullWidthBreakpoint: list.nth(map.keys($grid-responsive-column-counts), -1)
+) {
+  grid-column-start: $startColumn;
+  grid-column-end: $endColumn;
+
+  @if $fullWidthBreakpoint {
+    @include media-breakpoint-down($fullWidthBreakpoint) {
+      grid-column-start: 1;
+      grid-column-end: -1;
+    }
+  }
+}
+
+/// Mixin to render columns as a span starting at a specific column
+/// inside a grid container
+/// @author Aleph
+/// @param {Number} $spanColumns
+/// @param {Number} $startColumn
+
+@mixin spanColumns(
+  $spanColumns,
+  $startColumn: false,
+  $fullWidthBreakpoint: list.nth(map.keys($grid-responsive-column-counts), -1)
+) {
+  @if $startColumn {
+    grid-column: $startColumn / span $spanColumns;
+  } @else {
+    grid-column: span $spanColumns;
+  }
+
+  @if $fullWidthBreakpoint {
+    @include media-breakpoint-down($fullWidthBreakpoint) {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+/// Mixin to render a top-level container
+/// @author Aleph
+/// @param {Number} $columns - Number of columns in the grid
+/// @require $container-width
+/// @require $container-padding
+/// @require $container-padding-sm
+
+$container-width: 1200px !default;
+$container-padding: 48px !default;
+$container-padding-sm: 12px !default;
+
+@mixin container() {
+  max-width: $container-width + ($container-padding * 2);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+
+  .container & {
+    max-width: unset;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-right: $container-padding-sm;
+    padding-left: $container-padding-sm;
+
+    .container & {
+      max-width: unset;
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+/// Mixin to break out of containers and bleed edge-to-edge
+@mixin fullBleed() {
+  position: relative;
+  right: 50%;
+  left: 50%;
+  width: 100vw;
+  margin-right: -50vw;
+  margin-left: -50vw;
+}
+
+/// Mixin to render container with default grid options inside
+/// @author Aleph
+
+@mixin containerGrid {
+  @include container;
+  @include grid;
+}

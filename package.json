@@ -1,0 +1,21 @@
+{
+  "name": "@aleph/nought-sass-mixins",
+  "version": "1.0.0",
+  "description": "A set of useful mixins for use on sass projects",
+  "main": "sass/_index.scss",
+  "scripts": {
+    "dev": "open test/index.html && sass --watch --update --style=expanded sass:test/dist",
+    "test": "stylelint \"**/*.{css,sass,scss}\""
+  },
+  "author": "Aleph",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.8.6",
+    "sass": "^1.59.3",
+    "stylelint": "^15.3.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-order": "^6.0.3",
+    "stylelint-prettier": "^3.0.0",
+    "stylelint-scss": "^4.5.0"
+  }
+}

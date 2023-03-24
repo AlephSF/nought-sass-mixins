@@ -1,0 +1,33 @@
+// @use "sass:math";
+
+/// Mixin to show content only on screen readers
+@mixin srOnly() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: #000;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/// Mixin to reset all button styles
+@mixin buttonReset() {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+
+/// Mixin to reset all list styles
+@mixin listReset() {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

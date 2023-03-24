@@ -1,0 +1,71 @@
+@use "index" as *;
+
+.container {
+  @include container;
+
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  background-color: #eee;
+}
+
+.grid {
+  @include grid;
+
+  row-gap: 24px;
+}
+
+.container-grid {
+  @include containerGrid;
+
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+  @extend .container;
+}
+
+pre {
+  @include columns(1, -1);
+
+  padding: 0;
+  white-space: normal;
+}
+
+.column {
+  height: 150px;
+  background-color: pink;
+}
+
+.span {
+  min-height: 50px;
+  background-color: lightblue;
+}
+
+.one {
+  @include spanColumns(1, $fullWidthBreakpoint: false);
+}
+
+.three-nine {
+  @include columns(3, 9);
+}
+
+.quarter {
+  @include spanColumns(3, 2);
+
+  &-noflex {
+    @include spanColumns(3, 2, $fullWidthBreakpoint: false);
+  }
+}
+
+.full-bleed {
+  @include fullBleed;
+}
+
+.hide-md {
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+.hide-sm {
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
