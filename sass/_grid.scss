@@ -16,6 +16,10 @@ $grid-responsive-column-counts: (
   md: 8,
   sm: 4,
 ) !default;
+$grid-responsive-column-gap: (
+  md: $grid-column-gap,
+  sm: $grid-column-gap,
+) !default;
 
 @mixin grid($columns: $grid-column-count, $responsive-columns: true) {
   display: grid;
@@ -26,6 +30,12 @@ $grid-responsive-column-counts: (
     @each $breakpoint, $column-count in $grid-responsive-column-counts {
       @include media-breakpoint-down($breakpoint) {
         grid-template-columns: repeat($column-count, 1fr);
+      }
+    }
+
+    @each $breakpoint, $column-gap in $grid-responsive-column-gap {
+      @include media-breakpoint-down($breakpoint) {
+        column-gap: $column-gap;
       }
     }
   }
@@ -82,11 +92,13 @@ $grid-responsive-column-counts: (
 /// @param {Number} $columns - Number of columns in the grid
 /// @require $container-width
 /// @require $container-padding
-/// @require $container-padding-sm
 
 $container-width: 1200px !default;
 $container-padding: 48px !default;
-$container-padding-sm: 12px !default;
+$container-responsive-padding: (
+  md: $container-padding,
+  sm: 12px,
+) !default;
 
 @mixin container() {
   max-width: $container-width + ($container-padding * 2);
@@ -101,14 +113,16 @@ $container-padding-sm: 12px !default;
     padding-left: 0;
   }
 
-  @include media-breakpoint-down(sm) {
-    padding-right: $container-padding-sm;
-    padding-left: $container-padding-sm;
+  @each $breakpoint, $padding in $container-responsive-padding {
+    @include media-breakpoint-down($breakpoint) {
+      padding-right: $padding;
+      padding-left: $padding;
 
-    .container & {
-      max-width: unset;
-      padding-right: 0;
-      padding-left: 0;
+      .container & {
+        max-width: unset;
+        padding-right: 0;
+        padding-left: 0;
+      }
     }
   }
 }

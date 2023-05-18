@@ -110,10 +110,22 @@ $grid-responsive-column-counts: (
   sm: 4,
 );
 
+/// NB! You can set this up however you want but the key names must
+/// match responsive breakpoint keys(from above) to work properly!
+$grid-responsive-column-gap: (
+  md: $grid-column-gap,
+  sm: $grid-column-gap,
+) !default; /// at the "md" and sm" breakpoints
+
 /// Defaults for container() mixin
 $container-width: 1200px;
 $container-padding: 48px;
-$container-padding-sm: 12px; /// at the "sm" breakpoint
+/// NB! You can set this up however you want but the key names must
+/// match responsive breakpoint keys(from above) to work properly!
+$container-responsive-padding: (
+  md: $container-padding,
+  sm: 12px,
+) !default; /// at the "md" and sm" breakpoints
 ```
 
 Here's all the mixins with default args:
