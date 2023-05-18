@@ -120,10 +120,8 @@ $grid-responsive-column-gap: (
 /// Defaults for container() mixin
 $container-width: 1200px;
 $container-padding: 48px;
-$container-padding-sm: 12px; /// Deprecation warning: Use $container-responsive-padding instead
 /// NB! You can set this up however you want but the key names must
 /// match responsive breakpoint keys(from above) to work properly!
-/// $container-responsive-padding will override legacy $container-padding-sm
 $container-responsive-padding: (
   md: $container-padding,
   sm: 12px,
