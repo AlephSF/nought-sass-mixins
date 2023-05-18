@@ -115,7 +115,7 @@ $grid-responsive-column-counts: (
 $grid-responsive-column-gap: (
   md: $grid-column-gap,
   sm: $grid-column-gap,
-) !default;
+) !default; /// at the "md" and sm" breakpoints
 
 /// Defaults for container() mixin
 $container-width: 1200px;
