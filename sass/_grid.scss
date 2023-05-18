@@ -95,6 +95,7 @@ $grid-responsive-column-gap: (
 
 $container-width: 1200px !default;
 $container-padding: 48px !default;
+$container-padding-sm: 12px !default;
 $container-responsive-padding: (
   md: $container-padding,
   sm: 12px,
@@ -111,6 +112,17 @@ $container-responsive-padding: (
     max-width: unset;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-right: $container-padding-sm;
+    padding-left: $container-padding-sm;
+
+    .container & {
+      max-width: unset;
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 
   @each $breakpoint, $padding in $container-responsive-padding {
