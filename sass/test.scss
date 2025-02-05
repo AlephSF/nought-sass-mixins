@@ -1,17 +1,14 @@
 @use "index" as *;
 
 .container {
-  @include container;
-
   margin-bottom: 24px;
   padding-bottom: 24px;
   background-color: #eee;
+  @include container;
 }
 
 .grid {
   @include grid;
-
-  row-gap: 24px;
 }
 
 .container-grid {
@@ -22,10 +19,9 @@
 }
 
 pre {
-  @include columns(1, -1);
-
   padding: 0;
   white-space: normal;
+  @include columns(1, -1);
 }
 
 .column {

@@ -67,8 +67,9 @@ There are a few different modules available for use, and within them mixins
 that may be useful to you. 
 
 ### Breakpoints
-Convenience mixins for media queries along a set system of breakpoints. This is directly
-lifted from Bootstrap 5's media query mixins. These default variable values can be
+Convenience mixins for media queries along a set system of breakpoints. This is based on
+Bootstrap 5's media query mixins, but here they are updated to use range context media queries
+instead of min-width and max-width. The default variable values can be
 overridden:
 ```scss
 /// You can have as many breakpoints as you like, and call them whatever you like.
@@ -83,13 +84,12 @@ $grid-breakpoints: (
 );
 ```
 
-Detailed usage docs [are available here](https://getbootstrap.com/docs/5.2/layout/breakpoints/), 
-but here's the basic list of all mixins, assuming using default breakpoints:
+Detailed usage docs [are available here](https://getbootstrap.com/docs/5.2/layout/breakpoints/), but here's the basic list of all mixins, assuming using default breakpoints:
 ```scss
-@include media-breakpoint-up(md) { ... } // min width 768px
-@include media-breakpoint-down(md) { ... } // max-width: 767.98px
-@include media-breakpoint-only(md) { ... } // min 768 and max 991.98px
-@include media-breakpoint-between(md, xl) { ... } // min 768 and max 1199.98px
+@include media-breakpoint-up(md) { ... } // width >= 768px
+@include media-breakpoint-down(md) { ... } // width < 768px
+@include media-breakpoint-only(md) { ... } // 768px <= width < 992px
+@include media-breakpoint-between(md, xl) { ... } // 768px <= width < 1200px
 ```
 
 ### Grid
@@ -115,6 +115,13 @@ $grid-responsive-column-counts: (
 $grid-responsive-column-gap: (
   md: $grid-column-gap,
   sm: $grid-column-gap,
+) !default; /// at the "md" and sm" breakpoints
+
+/// NB! You can set this up however you want but the key names must
+/// match responsive breakpoint keys(from above) to work properly!
+$grid-responsive-row-gap: (
+  md: $grid-row-gap,
+  sm: $grid-row-gap,
 ) !default; /// at the "md" and sm" breakpoints
 
 /// Defaults for container() mixin

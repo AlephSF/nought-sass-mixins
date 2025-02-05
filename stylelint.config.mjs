@@ -1,4 +1,4 @@
-{
+const stylelintConfig = {
   "extends": ["stylelint-config-standard-scss", "stylelint-prettier/recommended"],
   "plugins": [
     "stylelint-order",
@@ -60,10 +60,32 @@
       "flex-grow",
       "flex-shrink",
       "flex-wrap",
+
+      "grid",
+      "grid-area",
+      "grid-auto-columns",
+      "grid-auto-flow",
+      "grid-auto-rows",
+      "grid-template",
+      "grid-template-areas",
+      "grid-template-columns",
+      "grid-template-rows",
+
+      "gap",
+
+      "grid-row",
+      "grid-row-start",
+      "grid-row-end",
+      "grid-column",
+      "grid-column-start",
+      "grid-column-end",
+
       "align-content",
       "align-items",
       "align-self",
       "justify-content",
+      "place-items",
+
       "order",
 
       "width",
@@ -197,3 +219,5 @@
     ], { "unspecified": "bottom" }]
   }
 }
+
+export default stylelintConfig

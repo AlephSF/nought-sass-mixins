@@ -11,7 +11,7 @@
 
 $grid-column-count: 12 !default;
 $grid-column-gap: 24px !default;
-$grid-row-gap: 24 !default;
+$grid-row-gap: 24px !default;
 $grid-responsive-column-counts: (
   md: 8,
   sm: 4,
@@ -20,11 +20,15 @@ $grid-responsive-column-gap: (
   md: $grid-column-gap,
   sm: $grid-column-gap,
 ) !default;
+$grid-responsive-row-gap: (
+  md: $grid-row-gap,
+  sm: $grid-row-gap,
+) !default;
 
 @mixin grid($columns: $grid-column-count, $responsive-columns: true) {
   display: grid;
-  column-gap: $grid-column-gap;
   grid-template-columns: repeat($columns, 1fr);
+  gap: $grid-row-gap $grid-column-gap;
 
   @if $responsive-columns {
     @each $breakpoint, $column-count in $grid-responsive-column-counts {
@@ -36,6 +40,12 @@ $grid-responsive-column-gap: (
     @each $breakpoint, $column-gap in $grid-responsive-column-gap {
       @include media-breakpoint-down($breakpoint) {
         column-gap: $column-gap;
+      }
+    }
+
+    @each $breakpoint, $row-gap in $grid-responsive-row-gap {
+      @include media-breakpoint-down($breakpoint) {
+        row-gap: $row-gap;
       }
     }
   }

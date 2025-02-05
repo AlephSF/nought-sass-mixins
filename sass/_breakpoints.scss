@@ -32,7 +32,7 @@ $grid-breakpoints: (
 @function breakpoint-next(
   $name,
   $breakpoints: $grid-breakpoints,
-  $breakpoint-names: map-keys($breakpoints)
+  $breakpoint-names: map.keys($breakpoints)
 ) {
   $n: list.index($breakpoint-names, $name);
 
@@ -41,8 +41,8 @@ $grid-breakpoints: (
   }
 
   @return if(
-    $n < length($breakpoint-names),
-    nth($breakpoint-names, $n + 1),
+    $n < list.length($breakpoint-names),
+    list.nth($breakpoint-names, $n + 1),
     null
   );
 }
@@ -58,18 +58,13 @@ $grid-breakpoints: (
 }
 
 // Maximum breakpoint width.
-// The maximum value is reduced by 0.02px to work around the limitations of
-// `min-` and `max-` prefixes and viewports with fractional widths.
-// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
-// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
-// See https://bugs.webkit.org/show_bug.cgi?id=178261
 
 //    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
 //    767.98px
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
   $max: map.get($breakpoints, $name);
 
-  @return if($max and $max > 0, $max - 0.02, null);
+  @return if($max and $max > 0, $max, null);
 }
 
 // Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
@@ -89,7 +84,7 @@ $grid-breakpoints: (
   $min: breakpoint-min($name, $breakpoints);
 
   @if $min {
-    @media (min-width: $min) {
+    @media (width >= $min) {
       @content;
     }
   } @else {
@@ -103,7 +98,7 @@ $grid-breakpoints: (
   $max: breakpoint-max($name, $breakpoints);
 
   @if $max {
-    @media (max-width: $max) {
+    @media (width < $max) {
       @content;
     }
   } @else {
@@ -122,7 +117,7 @@ $grid-breakpoints: (
   $max: breakpoint-max($upper, $breakpoints);
 
   @if $min != null and $max != null {
-    @media (min-width: $min) and (max-width: $max) {
+    @media ($min <= width < $max) {
       @content;
     }
   } @else if $max == null {
@@ -145,7 +140,7 @@ $grid-breakpoints: (
   $max: breakpoint-max($next, $breakpoints);
 
   @if $min != null and $max != null {
-    @media (min-width: $min) and (max-width: $max) {
+    @media ($min <= width < $max) {
       @content;
     }
   } @else if $max == null {

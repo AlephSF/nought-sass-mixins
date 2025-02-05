@@ -1,5 +1,3 @@
-// @use "sass:math";
-
 /// Mixin to show content only on screen readers
 @mixin srOnly() {
   position: absolute;
