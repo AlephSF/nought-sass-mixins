@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/AlephSF/nought-sass-mixins/compare/v2.0.0...v3.0.0) (2025-02-05)
+
+### ⚠ BREAKING CHANGES
+
+* A row-gap that matches column-gap has been added to the grid by default.
+
+### Features
+
+* Upgrade dependencies, add row-gap to grid, use range context media queries ([e0426ef](https://github.com/AlephSF/nought-sass-mixins/commit/e0426efcbac4e98e90ae7fe7dcf0c7a2bc6f05a0))
+
 ## [2.0.0](https://github.com/AlephSF/nought-sass-mixins/compare/v1.1.0...v2.0.0) (2023-05-18)
 
 
